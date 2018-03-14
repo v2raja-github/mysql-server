@@ -34,6 +34,8 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse applica
 
 // routes ======================================================================
 require('./user.service.js')(app, connection);
+require('./registration.service.js')(app, connection);
+require('./schedule.service.js')(app, connection);
 
 // listen (start app with node server.js) ======================================
 app.listen(port);
