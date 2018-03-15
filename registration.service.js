@@ -1,7 +1,7 @@
 //import { Register } from './domain';
 
 module.exports = function(app, connection) { 
-	app.get('/registration/:studentId', function(req, res) {
+	app.get('/enrolled/:studentId', function(req, res) {
 		console.log('inside get registration api');
 
 		let _qry = "select c.class_id, c.classname, c.department "
@@ -19,7 +19,50 @@ module.exports = function(app, connection) {
 		});
 	});
 
-	app.post('/registration/:studentId', function(req, res) {
+	app.get('/courses', function(req, res) {
+		console.log('inside get courses api');
+
+		let _qry = "select class_id, classname, department from class"
+		connection.query(_qry, function(err, result) {
+			if(err) {
+				//throw err;
+				res.json(err);
+			}
+			res.json(result);
+		});
+	});
+
+	app.get('/students', function(req, res) {
+		console.log('inside get students api');
+
+		let _qry = "select student_id, firstname, lastname, username, "
+			+ " gender, age, institution, degree from student"
+		connection.query(_qry, function(err, result) {
+			if(err) {
+				//throw err;
+				res.json(err);
+			}
+			res.json(result);
+		});
+	});
+
+	app.get('/student/:studentId', function(req, res) {
+		console.log('inside get student api');
+
+		let _qry = "select student_id, firstname, lastname, username, "
+			+ " gender, age, institution, degree from student"
+			+ " where student_id = "
+			+ req.params.studentId
+		connection.query(_qry, function(err, result) {
+			if(err) {
+				//throw err;
+				res.json(err);
+			}
+			res.json(result);
+		});
+	});
+
+	app.post('/register/:studentId', function(req, res) {
 		console.log('inside post registration api');
 
 		//const regClasses = new Array<Register>();
@@ -28,7 +71,7 @@ module.exports = function(app, connection) {
 
 		//for (let regClass of regClasses) {
 			let _qry = "replace into student_classes values ("
-				+ req.params.studentId + " , " + regClass.class_id + "";
+				+ regClass.student_id + " , " + regClass.class_id + ")";
 
 			connection.query(_qry, function(err, result) {
 				if(err) {
