@@ -78,9 +78,10 @@ module.exports = function(app, connection) {
 					//throw err;
 					res.json(err);
 					console.log(err);
-				}
+				} else {
 				res.json(result);
 				console.log(result);
+				}
 			});
 		//}
 	});

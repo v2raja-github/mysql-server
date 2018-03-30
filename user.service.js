@@ -5,8 +5,9 @@ module.exports = function(app, connection) {
 			if(err) {
 				//throw err;
 				res.json(err);
-			}
+			} else {
 			res.json(result);
+			}
 		});
 	});
 } 
