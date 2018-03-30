@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "mysql Program",
+            "name": "Launch Program",
             "program": "${workspaceFolder}/backend.js"
         }
     ]

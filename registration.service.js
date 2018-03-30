@@ -70,15 +70,17 @@ module.exports = function(app, connection) {
 		console.log(regClass);
 
 		//for (let regClass of regClasses) {
-			let _qry = "replace into student_classes values ("
+			let _qry = "insert into student_classes values ("
 				+ regClass.student_id + " , " + regClass.class_id + ")";
 
 			connection.query(_qry, function(err, result) {
 				if(err) {
 					//throw err;
 					res.json(err);
+					console.log(err);
 				}
 				res.json(result);
+				console.log(result);
 			});
 		//}
 	});
